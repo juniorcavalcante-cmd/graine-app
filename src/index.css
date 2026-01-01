@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 200 25% 15%;
+
+    /* Cards and surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 200 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 25% 15%;
+
+    /* Primary - Teal/Petrol Blue */
+    --primary: 195 55% 28%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 195 45% 95%;
+
+    /* Secondary */
+    --secondary: 200 15% 96%;
+    --secondary-foreground: 200 25% 25%;
+
+    /* Muted */
+    --muted: 200 10% 96%;
+    --muted-foreground: 200 15% 45%;
+
+    /* Accent */
+    --accent: 195 45% 92%;
+    --accent-foreground: 195 55% 28%;
+
+    /* Semantic Colors - Financial */
+    --income: 155 60% 40%;
+    --income-light: 155 50% 95%;
+    --income-foreground: 0 0% 100%;
+    
+    --expense: 0 70% 55%;
+    --expense-light: 0 60% 96%;
+    --expense-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-light: 38 80% 95%;
+    --warning-foreground: 38 92% 20%;
+
+    /* Category Colors */
+    --category-food: 25 90% 55%;
+    --category-transport: 210 80% 55%;
+    --category-health: 340 75% 55%;
+    --category-home: 165 60% 45%;
+    --category-entertainment: 280 65% 55%;
+    --category-education: 45 85% 50%;
+    --category-shopping: 320 70% 55%;
+    --category-bills: 200 50% 45%;
+
+    /* UI Elements */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 200 20% 90%;
+    --input: 200 20% 90%;
+    --ring: 195 55% 28%;
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 195 55% 28%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 195 55% 28%;
+    --sidebar-accent: 195 45% 35%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 195 45% 35%;
+    --sidebar-ring: 0 0% 100%;
+
+    /* Charts */
+    --chart-1: 195 55% 28%;
+    --chart-2: 155 60% 40%;
+    --chart-3: 0 70% 55%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 280 65% 55%;
+  }
+
+  .dark {
+    --background: 200 25% 10%;
+    --foreground: 200 10% 95%;
+    --card: 200 20% 14%;
+    --card-foreground: 200 10% 95%;
+    --popover: 200 20% 14%;
+    --popover-foreground: 200 10% 95%;
+    --primary: 195 50% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 195 40% 20%;
+    --secondary: 200 15% 18%;
+    --secondary-foreground: 200 10% 90%;
+    --muted: 200 15% 20%;
+    --muted-foreground: 200 10% 60%;
+    --accent: 195 35% 22%;
+    --accent-foreground: 195 50% 75%;
+    --income: 155 55% 50%;
+    --income-light: 155 40% 18%;
+    --expense: 0 65% 60%;
+    --expense-light: 0 50% 18%;
+    --warning: 38 85% 55%;
+    --warning-light: 38 70% 18%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 200 15% 22%;
+    --input: 200 15% 22%;
+    --ring: 195 50% 45%;
+    --sidebar-background: 200 25% 12%;
+    --sidebar-foreground: 200 10% 95%;
+    --sidebar-primary: 195 50% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 20% 18%;
+    --sidebar-accent-foreground: 200 10% 95%;
+    --sidebar-border: 200 15% 22%;
+    --sidebar-ring: 195 50% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .financial-card {
+    @apply bg-card rounded-xl border border-border p-6 shadow-sm transition-all duration-200;
+  }
+
+  .financial-card:hover {
+    @apply shadow-md;
+  }
+
+  .stat-value {
+    @apply text-3xl font-bold tracking-tight;
+  }
+
+  .stat-label {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+
+  .income-badge {
+    @apply bg-income-light text-income px-2.5 py-1 rounded-full text-sm font-medium;
+  }
+
+  .expense-badge {
+    @apply bg-expense-light text-expense px-2.5 py-1 rounded-full text-sm font-medium;
+  }
+
+  .nav-tab {
+    @apply px-4 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-200 rounded-lg hover:text-foreground hover:bg-muted;
+  }
+
+  .nav-tab-active {
+    @apply px-4 py-2.5 text-sm font-medium bg-primary text-primary-foreground rounded-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
