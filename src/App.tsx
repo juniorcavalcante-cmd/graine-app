@@ -6,11 +6,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
-import { supabase } from "./lib/supabase";
-
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+
+import { supabase } from "./lib/supabase";
 
 const queryClient = new QueryClient();
 
@@ -19,22 +19,26 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
   const [hasSession, setHasSession] = useState(false);
 
   useEffect(() => {
+    let mounted = true;
+
     supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
       setHasSession(!!data.session);
       setLoading(false);
     });
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
       setHasSession(!!session);
-      setLoading(false);
     });
 
     return () => {
+      mounted = false;
       sub.subscription.unsubscribe();
     };
   }, []);
 
-  if (loading) return null; // ou um loader simples
+  if (loading) return null; // pode trocar por um loader depois
   if (!hasSession) return <Navigate to="/login" replace />;
 
   return children;
@@ -49,7 +53,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-
             <Route
               path="/"
               element={
@@ -58,7 +61,6 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
